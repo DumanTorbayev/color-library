@@ -2,6 +2,13 @@ import styled from "styled-components";
 
 const NAME_HEIGHT = 21;
 
+export const ColorNameArea = styled.div<{ inputIsShown: boolean; isUppercase: boolean }>`
+  height: ${NAME_HEIGHT}px;
+  color: ${({ theme }) => theme.color.darkGrey};
+  cursor: pointer;
+  text-transform: ${({ isUppercase }) => (isUppercase ? "uppercase" : "capitalize")};
+`;
+
 export const RemoveColor = styled.button`
   width: 16px;
   min-width: 16px;
@@ -12,9 +19,16 @@ export const RemoveColor = styled.button`
   opacity: 0;
   transition: all 0.2s;
 
+  &:hover {
+    svg {
+      fill: ${({ theme }) => theme.color.coral};
+    }
+  }
+
   svg {
     width: 100%;
     height: 100%;
+    fill: ${({ theme }) => theme.color.darkGrey};
   }
 `;
 
@@ -30,6 +44,10 @@ export const Item = styled.div`
     ${RemoveColor} {
       opacity: 1;
       visibility: visible;
+    }
+
+    ${ColorNameArea} {
+      color: ${({ theme }) => theme.color.dusk};
     }
   }
 `;
@@ -53,13 +71,6 @@ export const ColorPickerArea = styled.button<{ bgColor: string }>`
   min-height: 18px;
   border-radius: 50%;
   ${({ bgColor }) => `background-color: ${bgColor}`};
-`;
-
-export const ColorNameArea = styled.div<{ inputIsShown: boolean; isUppercase: boolean }>`
-  height: ${NAME_HEIGHT}px;
-  color: ${({ theme }) => theme.color.darkGrey};
-  cursor: pointer;
-  text-transform: ${({ isUppercase }) => (isUppercase ? "uppercase" : "capitalize")};
 `;
 
 export const NameInput = styled.input<{ inputIsShown: boolean }>`

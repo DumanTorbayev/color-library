@@ -3,18 +3,12 @@ import { ChromePicker, ColorResult } from "react-color";
 
 import { ReactComponent as BarsIcon } from "../../assets/icons/bars.svg";
 import { ReactComponent as MinusIcon } from "../../assets/icons/minus-circle.svg";
-import { Colors } from "../../interfaces";
-import { useOnClickOutside } from "../../hooks/useOnClickOutside";
+import { ColorItemsMethods, Colors } from "../../interfaces";
+import { useOnClickOutside } from "../../hooks";
 
 import { ColorNameArea, ColorPicker, ColorPickerArea, DragAndDropArea, Item, NameInput, RemoveColor } from "./styles";
 
-interface ColorItemProps extends Colors {
-  onBlur: (id: string, name: string) => void;
-  onRemoveColor: (id: string) => void;
-  onColorPicker: ({ show, id }: { show: boolean; id: string }) => void;
-  colorPicker: { show: boolean; id: string };
-  onSelectColor: (id: string, hexCode: string) => void;
-}
+interface ColorItemProps extends Colors, ColorItemsMethods {}
 
 export const ColorItem: FC<ColorItemProps> = ({
   hexCode,
@@ -29,8 +23,10 @@ export const ColorItem: FC<ColorItemProps> = ({
   const [value, setValue] = useState("");
   const [inputIsShown, setInputIsShown] = useState(false);
   const [color, setColor] = useState(hexCode);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const colorPickerRef = useRef<HTMLDivElement>(null);
+
   const replacedHexCode = hexCode.replace("#", "");
 
   useEffect(() => {
@@ -48,7 +44,7 @@ export const ColorItem: FC<ColorItemProps> = ({
     setInputIsShown(true);
   };
 
-  const handleKeyPress = (evt: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
     if (evt.keyCode === 13) {
       const target = evt.target as HTMLInputElement;
 
@@ -95,7 +91,7 @@ export const ColorItem: FC<ColorItemProps> = ({
         <NameInput
           ref={inputRef}
           inputIsShown={inputIsShown}
-          onKeyDown={handleKeyPress}
+          onKeyDown={handleKeyDown}
           value={value}
           onBlur={handleOnBlur}
           onChange={handleOnChange}

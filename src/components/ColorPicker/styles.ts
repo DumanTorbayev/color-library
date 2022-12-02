@@ -15,6 +15,7 @@ export const ScrollbarThumbVertical = styled.div`
   background-color: ${({ theme }) => theme.color.grey50};
   border-radius: 37px;
 `;
+
 export const ColorsWrapper = styled.div`
   padding: 24px 28px;
 `;

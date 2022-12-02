@@ -2,10 +2,11 @@ import React, { FC, useEffect, useState } from "react";
 import Scrollbars from "react-custom-scrollbars-2";
 import { v4 as uuid } from "uuid";
 
+import { DraggedColorItem } from "../DraggedColorItem";
 import { ReactComponent as PlusIcon } from "../../assets/icons/plus.svg";
-import { ColorItem } from "../ColorItem";
-import { Colors } from "../../interfaces";
 import { useLocalStorage } from "../../hooks";
+import { Colors } from "../../interfaces";
+import { WidgetProps } from "../Widget";
 
 import {
   ColorAdd,
@@ -16,20 +17,23 @@ import {
   ScrollbarVerticalTrack,
 } from "./styles";
 
-interface ColorPickerProps {
-  colors: Colors[];
-}
+interface ColorPickerProps extends WidgetProps {}
 
 const trackVerticalStyle = { width: "4px", position: "absolute" };
+const STORAGE_KEY = "savedColors";
 
-export const ColorPicker: FC<ColorPickerProps> = ({ colors }) => {
-  const [savedColors, setSavedColors] = useLocalStorage<string>("savedColors", JSON.stringify(colors));
+export const ColorPicker: FC<ColorPickerProps> = ({ colors, onChange }) => {
+  const [savedColors, setSavedColors] = useLocalStorage<string>(STORAGE_KEY, JSON.stringify(colors));
   const [colorsState, setColorsState] = useState<Colors[]>(JSON.parse(savedColors));
   const [colorPicker, setColorPicker] = useState({ show: false, id: "" });
 
   useEffect(() => {
     setSavedColors(JSON.stringify(colorsState));
   }, [colorsState]);
+
+  useEffect(() => {
+    onChange(colorsState);
+  }, [colorsState, onChange]);
 
   const handleOnBlur = (id: string, name: string) => {
     setColorsState((prev) => {
@@ -66,6 +70,10 @@ export const ColorPicker: FC<ColorPickerProps> = ({ colors }) => {
     });
   };
 
+  const handleMoveColor = (items: Colors[]) => {
+    setColorsState(items);
+  };
+
   return (
     <Container>
       <Scrollbars
@@ -75,17 +83,15 @@ export const ColorPicker: FC<ColorPickerProps> = ({ colors }) => {
         <ColorsWrapper>
           <ColorsTitle>Color library</ColorsTitle>
 
-          {colorsState.map((color) => (
-            <ColorItem
-              key={color.id}
-              {...color}
-              onBlur={handleOnBlur}
-              onRemoveColor={handleRemoveColor}
-              onColorPicker={setColorPicker}
-              colorPicker={colorPicker}
-              onSelectColor={handleSelectColor}
-            />
-          ))}
+          <DraggedColorItem
+            colors={colorsState}
+            onBlur={handleOnBlur}
+            onRemoveColor={handleRemoveColor}
+            onColorPicker={setColorPicker}
+            colorPicker={colorPicker}
+            onSelectColor={handleSelectColor}
+            onMoveColor={handleMoveColor}
+          />
 
           <ColorAdd onClick={handleAddColor}>
             <PlusIcon />
