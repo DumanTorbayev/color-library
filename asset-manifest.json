@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/color-library/static/css/main.58462fbc.css",
+    "main.js": "/color-library/static/js/main.ba8516a4.js",
+    "static/media/palette.svg": "/color-library/static/media/palette.b0e2095fa20d66e883b8a0918490de99.svg",
+    "static/media/sliders-simple.svg": "/color-library/static/media/sliders-simple.b6aa479da78c616fa6b5142f75df0657.svg",
+    "static/media/clock-rotate-left.svg": "/color-library/static/media/clock-rotate-left.712b589c38a30e1037a1afdc5db31df9.svg",
+    "static/media/files.svg": "/color-library/static/media/files.e9a10f5cb2a0f72d91e36a45df700202.svg",
+    "static/media/bars.svg": "/color-library/static/media/bars.d88ad31a87d22b19955a15a400cea73c.svg",
+    "index.html": "/color-library/index.html",
+    "static/media/minus-circle.svg": "/color-library/static/media/minus-circle.4b04f40ec022efca6e689ead4cbd39ec.svg",
+    "static/media/plus.svg": "/color-library/static/media/plus.c848b3da577e503a9d46533cfbce5fd4.svg",
+    "main.58462fbc.css.map": "/color-library/static/css/main.58462fbc.css.map",
+    "main.ba8516a4.js.map": "/color-library/static/js/main.ba8516a4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.58462fbc.css",
+    "static/js/main.ba8516a4.js"
+  ]
+}
