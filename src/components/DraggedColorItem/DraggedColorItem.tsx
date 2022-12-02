@@ -28,11 +28,7 @@ export const DraggedColorItem: FC<DraggedColorItemProps> = ({ colors, onMoveColo
           <div {...provided.droppableProps} ref={provided.innerRef}>
             {colors.map((color, index) => (
               <Draggable key={color.id} draggableId={color.id} index={index}>
-                {(provided) => (
-                  <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                    <ColorItem key={color.id} {...color} {...rest} />
-                  </div>
-                )}
+                {(provided) => <ColorItem key={color.id} {...color} {...rest} provided={provided} />}
               </Draggable>
             ))}
             {provided.placeholder}

@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FC, FocusEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { ChromePicker, ColorResult } from "react-color";
+import { DraggableProvided } from "react-beautiful-dnd";
 
 import { ReactComponent as BarsIcon } from "../../assets/icons/bars.svg";
 import { ReactComponent as MinusIcon } from "../../assets/icons/minus-circle.svg";
@@ -8,7 +9,9 @@ import { useOnClickOutside } from "../../hooks";
 
 import { ColorNameArea, ColorPicker, ColorPickerArea, DragAndDropArea, Item, NameInput, RemoveColor } from "./styles";
 
-interface ColorItemProps extends Colors, ColorItemsMethods {}
+interface ColorItemProps extends Colors, ColorItemsMethods {
+  provided: DraggableProvided;
+}
 
 export const ColorItem: FC<ColorItemProps> = ({
   hexCode,
@@ -19,6 +22,7 @@ export const ColorItem: FC<ColorItemProps> = ({
   onColorPicker,
   colorPicker,
   onSelectColor,
+  provided,
 }) => {
   const [value, setValue] = useState("");
   const [inputIsShown, setInputIsShown] = useState(false);
@@ -80,8 +84,8 @@ export const ColorItem: FC<ColorItemProps> = ({
   };
 
   return (
-    <Item>
-      <DragAndDropArea>
+    <Item ref={provided.innerRef} {...provided.draggableProps}>
+      <DragAndDropArea {...provided.dragHandleProps}>
         <BarsIcon />
       </DragAndDropArea>
 
