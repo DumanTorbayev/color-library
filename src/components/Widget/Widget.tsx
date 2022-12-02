@@ -1,23 +1,21 @@
 import React, { FC } from "react";
-import styled from "styled-components";
 
 import { Switcher } from "../Switcher";
 import { ColorPicker } from "../ColorPicker";
 
-import { switcherItems, colors } from "../../mock";
+import { switcherItems } from "../../mock";
+import { Colors } from "../../interfaces";
 
-const Container = styled.div`
-  position: relative;
-  width: 25%;
-  height: 100vh;
-  margin-left: auto;
-  padding: 10px 0;
-  background-color: ${({ theme }) => theme.color.lightGreyBg};
-  overflow: hidden;
-`;
-export const Widget: FC = () => (
+import { Container } from "./styles";
+
+export interface WidgetProps {
+  colors: Colors[];
+  onChange: (colors: Colors[]) => void;
+}
+
+export const Widget: FC<WidgetProps> = ({ colors, onChange }) => (
   <Container>
     <Switcher items={switcherItems} />
-    <ColorPicker colors={colors} />
+    <ColorPicker colors={colors} onChange={onChange} />
   </Container>
 );
