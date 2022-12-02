@@ -10,5 +10,6 @@ export const theme: Theme = {
     grey50: "rgba(172, 189, 211, 0.5)",
     grey25: "rgba(172, 189, 211, 0.25)",
     mainBg: "#B6BEC6",
+    coral: "#EA5E5E",
   },
 };

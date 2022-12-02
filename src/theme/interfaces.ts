@@ -9,6 +9,7 @@ export type Color = {
   grey50: string;
   grey25: string;
   mainBg: string;
+  coral: string;
 };
 
 export interface Theme {
