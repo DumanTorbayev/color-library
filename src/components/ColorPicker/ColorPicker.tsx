@@ -5,6 +5,7 @@ import { v4 as uuid } from "uuid";
 import { ReactComponent as PlusIcon } from "../../assets/icons/plus.svg";
 import { ColorItem } from "../ColorItem";
 import { Colors } from "../../interfaces";
+import { useLocalStorage } from "../../hooks";
 
 import {
   ColorAdd,
@@ -22,11 +23,13 @@ interface ColorPickerProps {
 const trackVerticalStyle = { width: "4px", position: "absolute" };
 
 export const ColorPicker: FC<ColorPickerProps> = ({ colors }) => {
-  const [colorsState, setColorsState] = useState(colors);
+  const [savedColors, setSavedColors] = useLocalStorage<string>("savedColors", JSON.stringify(colors));
+  const [colorsState, setColorsState] = useState<Colors[]>(JSON.parse(savedColors));
+  const [colorPicker, setColorPicker] = useState({ show: false, id: "" });
 
   useEffect(() => {
-    setColorsState(colors);
-  }, [colors]);
+    setSavedColors(JSON.stringify(colorsState));
+  }, [colorsState]);
 
   const handleOnBlur = (id: string, name: string) => {
     setColorsState((prev) => {
@@ -50,6 +53,19 @@ export const ColorPicker: FC<ColorPickerProps> = ({ colors }) => {
     setColorsState((prev) => prev.filter((p) => p.id !== id));
   };
 
+  const handleSelectColor = (id: string, hexCode: string) => {
+    setColorsState((prev) => {
+      return prev.map((p) => {
+        if (p.id === id) {
+          p.hexCode = hexCode;
+          p.name = hexCode.replace("#", "");
+        }
+
+        return p;
+      });
+    });
+  };
+
   return (
     <Container>
       <Scrollbars
@@ -60,7 +76,15 @@ export const ColorPicker: FC<ColorPickerProps> = ({ colors }) => {
           <ColorsTitle>Color library</ColorsTitle>
 
           {colorsState.map((color) => (
-            <ColorItem key={color.id} {...color} onBlur={handleOnBlur} onRemoveColor={handleRemoveColor} />
+            <ColorItem
+              key={color.id}
+              {...color}
+              onBlur={handleOnBlur}
+              onRemoveColor={handleRemoveColor}
+              onColorPicker={setColorPicker}
+              colorPicker={colorPicker}
+              onSelectColor={handleSelectColor}
+            />
           ))}
 
           <ColorAdd onClick={handleAddColor}>
