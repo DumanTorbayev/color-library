@@ -19,6 +19,7 @@ export const RemoveColor = styled.button`
 `;
 
 export const Item = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0 12px;
@@ -35,7 +36,9 @@ export const Item = styled.div`
 
 export const DragAndDropArea = styled.div`
   width: 16px;
+  min-width: 16px;
   height: 16px;
+  min-height: 16px;
 
   svg {
     width: 100%;
@@ -43,7 +46,7 @@ export const DragAndDropArea = styled.div`
   }
 `;
 
-export const ColorPickerArea = styled.div<{ bgColor: string }>`
+export const ColorPickerArea = styled.button<{ bgColor: string }>`
   width: 18px;
   min-width: 18px;
   height: 18px;
@@ -52,13 +55,15 @@ export const ColorPickerArea = styled.div<{ bgColor: string }>`
   ${({ bgColor }) => `background-color: ${bgColor}`};
 `;
 
-export const ColorNameArea = styled.div<{ inputIsShown: boolean }>`
+export const ColorNameArea = styled.div<{ inputIsShown: boolean; isUppercase: boolean }>`
   height: ${NAME_HEIGHT}px;
   color: ${({ theme }) => theme.color.darkGrey};
   cursor: pointer;
+  text-transform: ${({ isUppercase }) => (isUppercase ? "uppercase" : "capitalize")};
 `;
 
 export const NameInput = styled.input<{ inputIsShown: boolean }>`
+  width: 100%;
   height: ${NAME_HEIGHT}px;
   padding: 0;
   color: ${({ theme }) => theme.color.darkGrey};
@@ -69,4 +74,11 @@ export const NameInput = styled.input<{ inputIsShown: boolean }>`
   &:active {
     outline: none;
   }
+`;
+
+export const ColorPicker = styled.div`
+  position: absolute;
+  top: 46px;
+  left: 28px;
+  z-index: 2;
 `;
