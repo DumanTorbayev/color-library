@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/color-library/static/css/main.58462fbc.css",
-    "main.js": "/color-library/static/js/main.ba8516a4.js",
+    "main.js": "/color-library/static/js/main.553af0f1.js",
     "static/media/palette.svg": "/color-library/static/media/palette.b0e2095fa20d66e883b8a0918490de99.svg",
     "static/media/sliders-simple.svg": "/color-library/static/media/sliders-simple.b6aa479da78c616fa6b5142f75df0657.svg",
     "static/media/clock-rotate-left.svg": "/color-library/static/media/clock-rotate-left.712b589c38a30e1037a1afdc5db31df9.svg",
@@ -11,10 +11,10 @@
     "static/media/minus-circle.svg": "/color-library/static/media/minus-circle.4b04f40ec022efca6e689ead4cbd39ec.svg",
     "static/media/plus.svg": "/color-library/static/media/plus.c848b3da577e503a9d46533cfbce5fd4.svg",
     "main.58462fbc.css.map": "/color-library/static/css/main.58462fbc.css.map",
-    "main.ba8516a4.js.map": "/color-library/static/js/main.ba8516a4.js.map"
+    "main.553af0f1.js.map": "/color-library/static/js/main.553af0f1.js.map"
   },
   "entrypoints": [
     "static/css/main.58462fbc.css",
-    "static/js/main.ba8516a4.js"
+    "static/js/main.553af0f1.js"
   ]
 }
