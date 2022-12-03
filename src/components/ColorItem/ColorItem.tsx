@@ -2,10 +2,10 @@ import React, { ChangeEvent, FC, FocusEvent, KeyboardEvent, useEffect, useRef, u
 import { ChromePicker, ColorResult } from "react-color";
 import { DraggableProvided } from "react-beautiful-dnd";
 
-import { ReactComponent as BarsIcon } from "../../assets/icons/bars.svg";
-import { ReactComponent as MinusIcon } from "../../assets/icons/minus-circle.svg";
-import { ColorItemsMethods, Colors } from "../../interfaces";
-import { useOnClickOutside } from "../../hooks";
+import { ReactComponent as BarsIcon } from "assets/icons/bars.svg";
+import { ReactComponent as MinusIcon } from "assets/icons/minus-circle.svg";
+import { ColorItemsMethods, Colors } from "types";
+import { useOnClickOutside } from "hooks";
 
 import { ColorNameArea, ColorPicker, ColorPickerArea, DragAndDropArea, Item, NameInput, RemoveColor } from "./styles";
 
@@ -111,7 +111,7 @@ export const ColorItem: FC<ColorItemProps> = ({
       </RemoveColor>
 
       {colorPicker.show && colorPicker.id === id && (
-        <ColorPicker ref={colorPickerRef}>
+        <ColorPicker ref={colorPickerRef} onKeyDown={() => console.log("key down")}>
           <ChromePicker color={color} disableAlpha={false} onChangeComplete={handleOnChangeComplete} />
         </ColorPicker>
       )}
