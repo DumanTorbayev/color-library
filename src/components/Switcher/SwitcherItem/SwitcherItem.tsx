@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 
-import { SwitcherItem as SwitcherItemInterface } from "../../../interfaces";
-import { ReactComponent as SliderSimpleIcon } from "../../../assets/icons/sliders-simple.svg";
-import { ReactComponent as PaletteIcon } from "../../../assets/icons/palette.svg";
-import { ReactComponent as ClockIcon } from "../../../assets/icons/clock-rotate-left.svg";
-import { ReactComponent as FilesIcon } from "../../../assets/icons/files.svg";
+import { SwitcherItem as SwitcherItemInterface } from "types";
+import { ReactComponent as SliderSimpleIcon } from "assets/icons/sliders-simple.svg";
+import { ReactComponent as PaletteIcon } from "assets/icons/palette.svg";
+import { ReactComponent as ClockIcon } from "assets/icons/clock-rotate-left.svg";
+import { ReactComponent as FilesIcon } from "assets/icons/files.svg";
 
 import { IconWrap, Item } from "./styles";
 

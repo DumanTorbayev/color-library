@@ -1,4 +1,4 @@
-import { Colors } from "../../interfaces";
+import { Colors } from "../../types";
 
 export const reorder = (list: Colors[], startIndex: number, endIndex: number) => {
   const result = Array.from(list);

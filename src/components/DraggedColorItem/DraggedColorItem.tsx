@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautiful-dnd";
 
 import { ColorItem } from "../ColorItem";
-import { ColorItemsMethods, Colors } from "../../interfaces";
+import { ColorItemsMethods, Colors } from "types";
 import { reorder } from "./helpers";
 
 interface DraggedColorItemProps extends ColorItemsMethods {
@@ -11,7 +11,7 @@ interface DraggedColorItemProps extends ColorItemsMethods {
 }
 
 export const DraggedColorItem: FC<DraggedColorItemProps> = ({ colors, onMoveColor, ...rest }) => {
-  const handleDragEnd = (result: any) => {
+  const handleDragEnd = (result: DropResult) => {
     if (!result.destination) {
       return;
     }

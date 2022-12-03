@@ -3,10 +3,9 @@ import Scrollbars from "react-custom-scrollbars-2";
 import { v4 as uuid } from "uuid";
 
 import { DraggedColorItem } from "../DraggedColorItem";
-import { ReactComponent as PlusIcon } from "../../assets/icons/plus.svg";
-import { useLocalStorage } from "../../hooks";
-import { Colors } from "../../interfaces";
-import { WidgetProps } from "../Widget";
+import { ReactComponent as PlusIcon } from "assets/icons/plus.svg";
+import { useLocalStorage } from "hooks";
+import { Colors } from "types";
 
 import {
   ColorAdd,
@@ -17,18 +16,21 @@ import {
   ScrollbarVerticalTrack,
 } from "./styles";
 
-interface ColorPickerProps extends WidgetProps {}
+interface ColorPickerProps {
+  colors: Colors[];
+  onChange: (colors: Colors[]) => void;
+}
 
 const trackVerticalStyle = { width: "4px", position: "absolute" };
 const STORAGE_KEY = "savedColors";
 
 export const ColorPicker: FC<ColorPickerProps> = ({ colors, onChange }) => {
-  const [savedColors, setSavedColors] = useLocalStorage<string>(STORAGE_KEY, JSON.stringify(colors));
-  const [colorsState, setColorsState] = useState<Colors[]>(JSON.parse(savedColors));
+  const [savedColors, setSavedColors] = useLocalStorage<Colors[]>(STORAGE_KEY, colors);
+  const [colorsState, setColorsState] = useState<Colors[]>(savedColors);
   const [colorPicker, setColorPicker] = useState({ show: false, id: "" });
 
   useEffect(() => {
-    setSavedColors(JSON.stringify(colorsState));
+    setSavedColors(colorsState);
   }, [colorsState]);
 
   useEffect(() => {
@@ -37,12 +39,14 @@ export const ColorPicker: FC<ColorPickerProps> = ({ colors, onChange }) => {
 
   const handleOnBlur = (id: string, name: string) => {
     setColorsState((prev) => {
-      return prev.map((p) => {
-        if (p.id === id) {
-          p.name = name;
+      return prev.map((color) => {
+        const clonedColor = structuredClone(color);
+
+        if (clonedColor.id === id) {
+          clonedColor.name = name;
         }
 
-        return p;
+        return clonedColor;
       });
     });
   };
@@ -59,13 +63,15 @@ export const ColorPicker: FC<ColorPickerProps> = ({ colors, onChange }) => {
 
   const handleSelectColor = (id: string, hexCode: string) => {
     setColorsState((prev) => {
-      return prev.map((p) => {
-        if (p.id === id) {
-          p.hexCode = hexCode;
-          p.name = hexCode.replace("#", "");
+      return prev.map((color) => {
+        const clonedColor = structuredClone(color);
+
+        if (clonedColor.id === id) {
+          clonedColor.hexCode = hexCode;
+          clonedColor.name = hexCode.replace("#", "");
         }
 
-        return p;
+        return clonedColor;
       });
     });
   };

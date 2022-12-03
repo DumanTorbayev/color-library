@@ -4,7 +4,7 @@ import { AppLayout } from "./layout";
 import { Widget } from "./components";
 
 import { colors } from "./mock";
-import { Colors } from "./interfaces";
+import { Colors } from "./types";
 
 export const App = () => {
   const handleChangeColor = (colors: Colors[]) => {

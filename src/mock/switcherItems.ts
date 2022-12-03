@@ -1,4 +1,4 @@
-import { SwitcherItem } from "../interfaces";
+import { SwitcherItem } from "../types";
 
 export const switcherItems: SwitcherItem[] = [
   {
